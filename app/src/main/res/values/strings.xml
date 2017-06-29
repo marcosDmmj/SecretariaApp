@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Secretaria App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="current_date">June, 2016</string>
+    <string name="add_event">ADD CALENDAR EVENT</string>
+    <string name="sun">DOM</string>
+    <string name="mon">SEG</string>
+    <string name="tue">TER</string>
+    <string name="wed">QUA</string>
+    <string name="thu">QUI</string>
+    <string name="fri">SEX</string>
+    <string name="sat">SAB</string>
+    <string name="last_date">30</string>
+
+    <string name="time_12am">00:00</string>
+    <string name="time_1am">01:00</string>
+    <string name="time_2am">02:00</string>
+    <string name="time_3am">03:00</string>
+    <string name="time_4am">04:00</string>
+    <string name="time_5am">05:00</string>
+    <string name="time_6am">06:00</string>
+    <string name="time_7am">07:00</string>
+    <string name="time_8am">08:00</string>
+    <string name="time_9am">09:00</string>
+    <string name="time_10am">10:00</string>
+    <string name="time_11am">11:00</string>
+    <string name="time_12pm">12:00</string>
+    <string name="time_13pm">13:00</string>
+    <string name="time_14pm">14:00</string>
+    <string name="time_15pm">15:00</string>
+    <string name="time_16pm">16:00</string>
+    <string name="time_17pm">17:00</string>
+    <string name="time_18pm">18:00</string>
+    <string name="time_19pm">19:00</string>
+    <string name="time_20pm">20:00</string>
+    <string name="time_21pm">21:00</string>
+    <string name="time_22pm">22:00</string>
+    <string name="time_23pm">23:00</string>
+    <string name="current_day_date">8 October, 2016</string>
+</resources>
