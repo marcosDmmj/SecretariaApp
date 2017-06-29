@@ -15,6 +15,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
 //import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
 //import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        //setRepeatingAsyncTask();
+        setRepeatingAsyncTask();
     }
 
     private void setRepeatingAsyncTask() {
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        /*
+
                         try {
-                           // DownloadStatus jsonTask = new DownloadStatus();
+                            DownloadStatus jsonTask = new DownloadStatus();
                             Integer status = jsonTask.execute().get();
                             if (status == 1) {
                                 btnChamar.setEnabled(false);
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         } catch (Exception e) {
                             Log.e("Erro", e.getMessage());
-                        }*/
+                        }
                     }
                 });
             }

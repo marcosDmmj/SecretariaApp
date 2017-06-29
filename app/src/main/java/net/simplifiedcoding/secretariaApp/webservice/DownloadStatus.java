@@ -30,7 +30,7 @@ public class DownloadStatus extends AsyncTask<Void, Void, Integer> {
         try {
             URL url;
             HttpURLConnection urlConnection = null;
-            url = new URL("http://tccmari.esy.es/Status.txt");
+            url = new URL("http://ufam-automation.net/marcosmoura/Status.txt");
             urlConnection = (HttpURLConnection) url.openConnection();
 
             int responseCode = urlConnection.getResponseCode();

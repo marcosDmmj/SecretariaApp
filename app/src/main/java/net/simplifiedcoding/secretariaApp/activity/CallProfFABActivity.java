@@ -94,8 +94,14 @@ public class CallProfFABActivity extends AppCompatActivity {
 
         outputFileUri = Uri.fromFile(newfile);
 
-        requestPermissions(new String[]{Manifest.permission.CAMERA},
-                    CAMERA_REQUEST);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA},
+                        CAMERA_REQUEST);
+        } else {
+            Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            startActivityForResult(intent2, Activity.RESULT_OK);
+        }
 
 //        System.out.println("Photo: " + outputFileUri.getPath());
     }

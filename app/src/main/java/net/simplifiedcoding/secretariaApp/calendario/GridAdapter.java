@@ -11,11 +11,9 @@ import android.widget.TextView;
 
 import net.simplifiedcoding.insertintomysql.R;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class GridAdapter extends ArrayAdapter {
     private static final String TAG = GridAdapter.class.getSimpleName();
