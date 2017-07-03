@@ -117,8 +117,11 @@ public class AddEventActivity extends AppCompatActivity {
     }
 
     public void startHourClicked(View view) {
+        Log.e("Erro startHourClicked", "Antes");
         DialogFragment startTimePicker = new TimePickerFragmentStart(currentStartTime.getText());
         startTimePicker.show(getFragmentManager(),"TimePicker");
+        Log.e("Erro startHourClicked", "Depois");
+        Toast.makeText(this, "Veio ou não?!!?!!", Toast.LENGTH_SHORT).show();
     }
 
     public void endHourClicked(View view) {

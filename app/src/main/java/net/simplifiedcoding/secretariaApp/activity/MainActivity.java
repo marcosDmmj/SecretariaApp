@@ -15,6 +15,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
 //import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
 //import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
@@ -80,13 +81,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-       // task.run();
+        task.run();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //task.run();
+        task.run();
     }
 
     public void chamarProf(View view) {
@@ -97,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void agendar(View view) {
         Intent intent = new Intent(this, CalendarActivity.class);
-//        task.cancel();
-        /*
+        task.cancel();
+
         try {
             int ok = new DownloadEvents(this).execute().get();
         } catch (InterruptedException e) {
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        */
+
         startActivity(intent);
 
     }
