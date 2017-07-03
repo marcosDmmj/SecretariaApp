@@ -18,7 +18,7 @@ public class UploadResetResposta extends AsyncTask<Void, Void, Void> {
             // Resete da resposta do prof, pois ele acabou de responder náo mexer nisso.
             URL url;
             HttpURLConnection urlConnection = null;
-            url = new URL("http://tccmari.esy.es/setResposta.php?Resposta=-1");
+            url = new URL("http://ufam-automation.net/marcosmoura/setResposta.php?Resposta=-1");
             urlConnection = (HttpURLConnection) url.openConnection();
 
             int responseCode = urlConnection.getResponseCode();

@@ -40,7 +40,7 @@ public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
         try {
             URL url;
             HttpURLConnection urlConnection = null;
-            String s = "http://tccmari.esy.es/addEventTemp.php?" +
+            String s = "http://ufam-automation.net/marcosmoura/addEventTemp.php?" +
                     "Titulo=" + params[0] +
                     "&Data_inicio=" + params[1] +
                     "&Data_fim=" + params[2] +

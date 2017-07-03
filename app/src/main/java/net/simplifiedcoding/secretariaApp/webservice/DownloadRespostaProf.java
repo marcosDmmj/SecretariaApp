@@ -46,7 +46,7 @@ public class DownloadRespostaProf extends AsyncTask<Void, Void, Integer> {
             try {
                 URL url;
                 HttpURLConnection urlConnection = null;
-                url = new URL("http://tccmari.esy.es/Resposta.txt");
+                url = new URL("http://ufam-automation.net/marcosmoura/Resposta.txt");
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 int responseCode = urlConnection.getResponseCode();

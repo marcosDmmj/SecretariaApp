@@ -9,6 +9,7 @@ import android.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -144,8 +145,10 @@ public class AddEventActivity extends AppCompatActivity {
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Log.e("Erro addNewEvent", e.getMessage());
             } catch (ExecutionException e) {
                 e.printStackTrace();
+                Log.e("Erro addNewEvent", e.getMessage());
             }
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP);

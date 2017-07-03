@@ -47,7 +47,7 @@ public class DownloadEvents extends AsyncTask<Void, Void, Integer> {
         try {
             URL url;
             HttpURLConnection urlConnection = null;
-            url = new URL("http://tccmari.esy.es/getEvents.php");
+            url = new URL("http://ufam-automation.net/marcosmoura/getEvents.php");
             urlConnection = (HttpURLConnection) url.openConnection();
 
             int responseCode = urlConnection.getResponseCode();

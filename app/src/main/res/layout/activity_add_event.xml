@@ -172,11 +172,11 @@
     </RelativeLayout>
 
     <Button
-        android:text="Adicionar Evento"
+        android:id="@+id/btnAddEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnAddEvento"
         android:layout_marginTop="20dp"
+        android:enabled="false"
         android:onClick="addNewEvent"
-        android:enabled="false"/>
+        android:text="Adicionar Evento" />
 </LinearLayout>

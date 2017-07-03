@@ -67,7 +67,7 @@ public class UploadImage extends AsyncTask<Void, Void, Boolean> {
 
                 // open a URL connection to the Servlet
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                URL url = new URL("http://tccmari.esy.es/uploadImage.php");
+                URL url = new URL("http://ufam-automation.net/marcosmoura/uploadImage.php");
 
                 // Open a HTTP  connection to  the URL
                 conn = (HttpURLConnection) url.openConnection();

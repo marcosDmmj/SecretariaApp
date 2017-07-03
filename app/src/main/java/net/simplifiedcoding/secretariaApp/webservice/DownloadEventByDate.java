@@ -46,7 +46,7 @@ public class DownloadEventByDate extends AsyncTask<String, Void, Integer>{
             URL url;
             String date = params[0];
             HttpURLConnection urlConnection = null;
-            url = new URL("http://tccmari.esy.es/selectbyDate.php?Data=" + date);
+            url = new URL("http://ufam-automation.net/marcosmoura/selectbyDate.php?Data=" + date);
             Log.e("Date ", date);
             urlConnection = (HttpURLConnection) url.openConnection();
 
