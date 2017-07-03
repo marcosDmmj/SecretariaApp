@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void chamarProf(View view) {
         Intent intent = new Intent(this, CallProfFABActivity.class);
-//        task.cancel();
+        task.cancel();
         startActivity(intent);
     }
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         task.cancel();
 
         try {
-            int ok = new DownloadEvents(this).execute().get();
+            new DownloadEvents(this).execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {

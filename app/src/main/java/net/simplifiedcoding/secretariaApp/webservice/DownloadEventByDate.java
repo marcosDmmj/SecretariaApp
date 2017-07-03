@@ -41,7 +41,6 @@ public class DownloadEventByDate extends AsyncTask<String, Void, Integer>{
     }
     @Override
     protected Integer doInBackground(String... params) {
-        String server_response;
         try {
             URL url;
             String date = params[0];
@@ -60,6 +59,7 @@ public class DownloadEventByDate extends AsyncTask<String, Void, Integer>{
 
                 for (int i = 0; i < eventosL.length(); i++) {
                     evento = new JSONObject(eventosL.getString(i));
+                    Log.e("Não é", "Pegiu alum eventi?"+evento.toString());
                     eventos.add(new EventObjects(Integer.parseInt(evento.getString("Evento_id")), evento.getString("Titulo"), Util.stringToDateComplete(evento.getString("Data_inicio")), Util.stringToDateComplete(evento.getString("Data_fim"))));
                 }
             }
@@ -68,6 +68,7 @@ public class DownloadEventByDate extends AsyncTask<String, Void, Integer>{
             e.printStackTrace();
             Log.e("Erro mesmo", "Erro - " + e.getMessage());
         }
+        Log.e("Erro mesmo", "Pegiu alum eventi?");
         return 1;
     }
 

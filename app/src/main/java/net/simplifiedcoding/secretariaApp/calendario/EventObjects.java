@@ -9,12 +9,6 @@ public class EventObjects implements Serializable{
     private Date start;
     private Date end;
 
-    public EventObjects(String message, Date start, Date end) {
-        this.message = message;
-        this.start = start;
-        this.end = end;
-    }
-
     public EventObjects(int id, String message, Date start, Date end) {
         this.start = start;
         this.end = end;

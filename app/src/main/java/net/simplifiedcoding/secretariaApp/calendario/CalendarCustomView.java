@@ -90,7 +90,7 @@ public class CalendarCustomView extends LinearLayout{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    Integer ok = new DownloadEventByDate(context).execute(Util.stringToStringWS(mAdapter.getDate(position))).get();
+                    new DownloadEventByDate(context).execute(Util.stringToStringWS(mAdapter.getDate(position))).get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -104,9 +104,9 @@ public class CalendarCustomView extends LinearLayout{
     }
 
     private void setUpCalendarAdapter(){
-        ArrayList<EventObjects> eventos = new ArrayList<>();
-        //ArrayList<EventObjects> eventos = DownloadEvents.eventos;
-        //Log.e("Lista eventos", eventos.toString());
+        //ArrayList<EventObjects> eventos = new ArrayList<>();
+        ArrayList<EventObjects> eventos = DownloadEvents.eventos;
+        Log.e("Lista eventos", eventos.toString());
         List<Date> dayValueInCells = new ArrayList<Date>();
 
         Calendar mCal = (Calendar)cal.clone();

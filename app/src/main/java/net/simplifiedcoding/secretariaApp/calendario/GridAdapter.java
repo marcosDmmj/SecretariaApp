@@ -21,6 +21,7 @@ public class GridAdapter extends ArrayAdapter {
     private List<Date> monthlyDates;
     private Calendar currentDate;
     private List<EventObjects> allEvents;
+
     public GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, List<EventObjects> allEvents) {
         super(context, R.layout.single_cell_layout);
         this.monthlyDates = monthlyDates;
@@ -28,6 +29,7 @@ public class GridAdapter extends ArrayAdapter {
         this.allEvents = allEvents;
         mInflater = LayoutInflater.from(context);
     }
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

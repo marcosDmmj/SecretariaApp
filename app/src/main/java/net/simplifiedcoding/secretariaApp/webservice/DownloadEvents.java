@@ -43,7 +43,6 @@ public class DownloadEvents extends AsyncTask<Void, Void, Integer> {
     }
     @Override
     protected Integer doInBackground(Void... params) {
-        String server_response;
         try {
             URL url;
             HttpURLConnection urlConnection = null;

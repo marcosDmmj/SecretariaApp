@@ -82,7 +82,7 @@ public class DayCalendarActivity extends AppCompatActivity {
         date = Util.dateToString(Util.changeDay(Util.stringToOnlyDate(date), -1));
         currentDate.setText(Util.stringToStringDayWeek(date));
         try {
-            Integer ok = new DownloadEventByDate(this).execute(Util.stringToStringWS(date)).get();
+            new DownloadEventByDate(this).execute(Util.stringToStringWS(date)).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -99,7 +99,7 @@ public class DayCalendarActivity extends AppCompatActivity {
         currentDate.setText(Util.stringToStringDayWeek(date));
 
         try {
-            Integer ok = new DownloadEventByDate(this).execute(Util.stringToStringWS(date)).get();
+            new DownloadEventByDate(this).execute(Util.stringToStringWS(date)).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -111,6 +111,7 @@ public class DayCalendarActivity extends AppCompatActivity {
 
     private void displayDailyEvents() {
         ArrayList<EventObjects> eventos = DownloadEventByDate.eventos;
+        Log.e("Erro no DisplayDaileyEv", "Pegiu alum eventi?"+eventos.toString());
         for (EventObjects eObject : eventos) {
             Date eventDate = eObject.getDateStart();
             Date endDate = eObject.getDateEnd();
@@ -159,12 +160,12 @@ public class DayCalendarActivity extends AppCompatActivity {
         TextView mEventView = new TextView(DayCalendarActivity.this);
         RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        lParam.topMargin = topMargin * 4; //*2
+        lParam.topMargin = topMargin;
         lParam.leftMargin = 24;
 
         mEventView.setLayoutParams(lParam);
         mEventView.setPadding(24, 0, 24, 0);
-        mEventView.setHeight(height * 4);
+        mEventView.setHeight(height);
         mEventView.setGravity(0x11);
         mEventView.setTextColor(Color.parseColor("#ffffff"));
         mEventView.setText(message);
