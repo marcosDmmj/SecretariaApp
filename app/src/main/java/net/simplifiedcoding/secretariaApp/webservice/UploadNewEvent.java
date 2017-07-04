@@ -2,10 +2,8 @@ package net.simplifiedcoding.secretariaApp.webservice;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,13 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
-
-import net.simplifiedcoding.secretariaApp.calendario.EventObjects;
-
-/**
- * Created by Toshiba on 27/01/2017.
- */
 
 public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
     private Context c;
@@ -39,7 +30,7 @@ public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
     protected Integer doInBackground(String... params) {
         try {
             URL url;
-            HttpURLConnection urlConnection = null;
+            HttpURLConnection urlConnection;
             String s = "http://ufam-automation.net/marcosmoura/addEventTemp.php?" +
                     "Titulo=" + params[0] +
                     "&Data_inicio=" + params[1] +
@@ -47,13 +38,14 @@ public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
                     "&Email=" + params[3] +
                     "&Nome=" + params[4];
             url = new URL(s);
-            Log.e("To Uploadando isso: ", s);
+            Log.d("UploadNewEvent", "ulr = "+s);
             urlConnection = (HttpURLConnection) url.openConnection();
 
             int responseCode = urlConnection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                String json = readStream(urlConnection.getInputStream());
+                Log.d("UploadNewEvent", "Está tudo ok na conexão!");
+                Log.d("UploadNewEvent", "Resultado = "+readStream(urlConnection.getInputStream()));
                 dialog.dismiss();
                 return 1;
             }
@@ -65,17 +57,16 @@ public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
         }
 
         dialog.dismiss();
-
-
+        Log.d("UploadNewEvent", "Retornou not ok");
         return 0;
     }
 
     private String readStream(InputStream in) {
         BufferedReader reader = null;
-        StringBuffer response = new StringBuffer();
+        StringBuilder response = new StringBuilder();
         try {
             reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }

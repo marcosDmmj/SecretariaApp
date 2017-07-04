@@ -158,6 +158,7 @@ public class DayCalendarActivity extends AppCompatActivity {
         mEventView.setLayoutParams(lParam);
         mEventView.setPadding(24, 0, 24, 0);
         mEventView.setHeight(height);
+        mEventView.setWidth(400);
         mEventView.setGravity(0x11);
         mEventView.setTextColor(Color.parseColor("#ffffff"));
         mEventView.setText(message);

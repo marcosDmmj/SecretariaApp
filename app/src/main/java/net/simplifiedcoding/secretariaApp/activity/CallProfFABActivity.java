@@ -117,6 +117,7 @@ public class CallProfFABActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(cr, outputFileUri);
                 Bitmap.createScaledBitmap(bitmap, 300, 175, true);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 40, new ByteArrayOutputStream());
+                imageViewPhoto.setRotation(180);
                 imageViewPhoto.setImageBitmap(bitmap);
                 btnEnviarFoto.setEnabled(true);
             } catch (Exception e) {
