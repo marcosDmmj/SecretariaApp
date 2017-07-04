@@ -2,7 +2,6 @@ package net.simplifiedcoding.secretariaApp.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.appindexing.Action;
@@ -13,7 +12,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import net.simplifiedcoding.insertintomysql.R;
 
 public class CalendarActivity extends AppCompatActivity {
-    private static final String TAG = CalendarActivity.class.getSimpleName();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -35,8 +33,7 @@ public class CalendarActivity extends AppCompatActivity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Calendario Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("Calendario Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)

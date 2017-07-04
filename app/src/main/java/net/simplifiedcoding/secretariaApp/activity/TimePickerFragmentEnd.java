@@ -11,7 +11,6 @@ import android.widget.TimePicker;
 import net.simplifiedcoding.insertintomysql.R;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class TimePickerFragmentEnd extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
@@ -23,20 +22,14 @@ public class TimePickerFragmentEnd extends DialogFragment implements TimePickerD
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
-        //Use the current time as the default values for the time picker
-        final Calendar c = Calendar.getInstance();
         int hour = initDate.getHours();
         int minute = initDate.getMinutes();
 
-        //Create and return a new instance of TimePickerDialog
         return new TimePickerDialog(getActivity(),this, hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
     }
 
-    //onTimeSet() callback method
     public void onTimeSet(TimePicker view, int hourOfDay, int minute){
-        //Do something with the user chosen time
-        //Get reference of host activity (XML Layout File) TextView widget
         TextView tv = (TextView) getActivity().findViewById(R.id.txtHoraFim);
         tv.setText(pad(hourOfDay)
                 + ":" + pad(minute));

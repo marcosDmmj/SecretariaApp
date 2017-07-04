@@ -1,9 +1,7 @@
 <resources>
-    <string name="app_name">Secretaria App</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Secretária</string>
     <string name="action_settings">Settings</string>
 
-    <string name="current_date">June, 2016</string>
     <string name="add_event">ADD CALENDAR EVENT</string>
     <string name="sun">DOM</string>
     <string name="mon">SEG</string>
@@ -38,5 +36,4 @@
     <string name="time_21pm">21:00</string>
     <string name="time_22pm">22:00</string>
     <string name="time_23pm">23:00</string>
-    <string name="current_day_date">8 October, 2016</string>
 </resources>

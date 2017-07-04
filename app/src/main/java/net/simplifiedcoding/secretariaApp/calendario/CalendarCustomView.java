@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-//import com.inducesmile.androidcustomcalendar.database.DatabaseQuery;
 
 import net.simplifiedcoding.insertintomysql.R;
 import net.simplifiedcoding.secretariaApp.activity.DayCalendarActivity;
@@ -31,13 +29,10 @@ public class CalendarCustomView extends LinearLayout{
     private ImageView previousButton, nextButton;
     private TextView currentDate;
     private GridView calendarGridView;
-    private Button addEventButton;
     private static final int MAX_CALENDAR_COLUMN = 42;
-    private int month, year;
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private GridAdapter mAdapter;
-//    private DatabaseQuery mQuery;
 
     public CalendarCustomView(Context context) {
         super(context);
@@ -57,7 +52,7 @@ public class CalendarCustomView extends LinearLayout{
     }
 
     private void initializeUILayout(){
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.calendar_layout, this);
         previousButton = (ImageView)view.findViewById(R.id.previous_month);
         nextButton = (ImageView)view.findViewById(R.id.next_month);
@@ -91,9 +86,7 @@ public class CalendarCustomView extends LinearLayout{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
                     new DownloadEventByDate(context).execute(Util.stringToStringWS(mAdapter.getDate(position))).get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
+                } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
                 Intent intent = new Intent(context, DayCalendarActivity.class);
@@ -104,10 +97,9 @@ public class CalendarCustomView extends LinearLayout{
     }
 
     private void setUpCalendarAdapter(){
-        //ArrayList<EventObjects> eventos = new ArrayList<>();
         ArrayList<EventObjects> eventos = DownloadEvents.eventos;
-        Log.e("Lista eventos", eventos.toString());
-        List<Date> dayValueInCells = new ArrayList<Date>();
+        Log.d(TAG, eventos.toString());
+        List<Date> dayValueInCells = new ArrayList<>();
 
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
@@ -117,7 +109,7 @@ public class CalendarCustomView extends LinearLayout{
             dayValueInCells.add(mCal.getTime());
             mCal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        Log.d(TAG, "Number of date " + dayValueInCells.size());
+
         String sDate = Util.dateMonthToString(cal.getTime());
         currentDate.setText(sDate);
         mAdapter = new GridAdapter(context, dayValueInCells, cal, eventos);

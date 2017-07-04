@@ -1,27 +1,22 @@
 package net.simplifiedcoding.secretariaApp.activity;
 
-import android.app.Dialog;
-import android.app.TimePickerDialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import net.simplifiedcoding.insertintomysql.R;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
 import net.simplifiedcoding.secretariaApp.webservice.UploadNewEvent;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
@@ -29,7 +24,6 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class AddEventActivity extends AppCompatActivity {
     private TextView currentDate, currentStartTime, currentEndTime;
-    private String date;
     private EditText nome, email, titulo;
     private Button addEvento;
     private int countTitulo, countNome, countEmail;
@@ -39,7 +33,7 @@ public class AddEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         Intent intent = getIntent();
-        date = intent.getStringExtra("Date");
+        String date = intent.getStringExtra("Date");
         titulo = (EditText)findViewById(R.id.editTxtTitulo);
         nome = (EditText)findViewById(R.id.editTxtNome);
         email = (EditText)findViewById(R.id.editTxtEmail);
@@ -143,10 +137,7 @@ public class AddEventActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(this, "naaaaaoooo!!!!", Toast.LENGTH_SHORT).show();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                Log.e("Erro addNewEvent", e.getMessage());
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
                 Log.e("Erro addNewEvent", e.getMessage());
             }

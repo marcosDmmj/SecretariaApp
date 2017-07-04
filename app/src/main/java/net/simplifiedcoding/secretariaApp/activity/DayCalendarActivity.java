@@ -21,11 +21,9 @@ import net.simplifiedcoding.insertintomysql.R;
 import net.simplifiedcoding.secretariaApp.calendario.EventObjects;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadEventByDate;
-import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
@@ -34,8 +32,6 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class DayCalendarActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private ImageView previousDay;
-    private ImageView nextDay;
     private TextView currentDate;
     private RelativeLayout mLayout;
     private int eventIndex;
@@ -57,8 +53,8 @@ public class DayCalendarActivity extends AppCompatActivity {
         currentDate = (TextView) findViewById(R.id.display_current_date);
         currentDate.setText(Util.stringToStringDayWeek(date));
         displayDailyEvents();
-        previousDay = (ImageView) findViewById(R.id.previous_day);
-        nextDay = (ImageView) findViewById(R.id.next_day);
+        ImageView previousDay = (ImageView) findViewById(R.id.previous_day);
+        ImageView nextDay = (ImageView) findViewById(R.id.next_day);
         previousDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,9 +79,7 @@ public class DayCalendarActivity extends AppCompatActivity {
         currentDate.setText(Util.stringToStringDayWeek(date));
         try {
             new DownloadEventByDate(this).execute(Util.stringToStringWS(date)).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -100,9 +94,7 @@ public class DayCalendarActivity extends AppCompatActivity {
 
         try {
             new DownloadEventByDate(this).execute(Util.stringToStringWS(date)).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -179,8 +171,7 @@ public class DayCalendarActivity extends AppCompatActivity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("DayCalendar Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("DayCalendar Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)

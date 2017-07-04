@@ -25,7 +25,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnChamar, btnAgenda;
+    private Button btnChamar;
     private TimerTask task;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-        btnAgenda = (Button) findViewById(R.id.btnAgendar);
         btnChamar = (Button) findViewById(R.id.btnChamar);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -102,9 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             new DownloadEvents(this).execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -118,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Inicio Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("Inicio Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)
