@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -41,7 +42,10 @@ import java.io.IOException;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class CallProfFABActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
+
     private ImageView imageViewPhoto;
+    private Button btnEnviarFoto;
+
     private GoogleApiClient client;
     private String file;
     private Uri outputFileUri;
@@ -59,6 +63,7 @@ public class CallProfFABActivity extends AppCompatActivity {
         setContentView(R.layout.activity_call_prof_fab);
 
         imageViewPhoto = (ImageView) findViewById(R.id.imageView2);
+        btnEnviarFoto = (Button) findViewById(R.id.btnEnviarFoto);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -108,11 +113,12 @@ public class CallProfFABActivity extends AppCompatActivity {
             ContentResolver cr = getContentResolver();
             try {
                 Toast.makeText(this, "Foto tirada!", Toast.LENGTH_SHORT).show();
-                ajustaFoto();
-            //    Bitmap bitmap = MediaStore.Images.Media.getBitmap(cr, outputFileUri);
-            //    Bitmap.createScaledBitmap(bitmap, 300, 175, true);
-            //    bitmap.compress(Bitmap.CompressFormat.JPEG, 40, new ByteArrayOutputStream());
-               // imageViewPhoto.setImageBitmap(bitmap);
+               // ajustaFoto();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(cr, outputFileUri);
+                Bitmap.createScaledBitmap(bitmap, 300, 175, true);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 40, new ByteArrayOutputStream());
+                imageViewPhoto.setImageBitmap(bitmap);
+                btnEnviarFoto.setEnabled(true);
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.e("CallProfFab","Erro mesmo ó! "+e.getMessage());
@@ -249,7 +255,7 @@ public class CallProfFABActivity extends AppCompatActivity {
 
 // cria variável com a imagem rotacionada
         Bitmap rotatedBmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
-        BitmapDrawable bmpd = new BitmapDrawable(rotatedBmp);
+        @SuppressWarnings("deprecation") BitmapDrawable bmpd = new BitmapDrawable(rotatedBmp);
 
 // redimensiona a imagem
         Integer lateral = 1024; // tamanho final da dimensão maior da imagem
