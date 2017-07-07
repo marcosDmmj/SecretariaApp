@@ -3,28 +3,24 @@ package net.simplifiedcoding.secretariaApp.webservice;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import net.simplifiedcoding.secretariaApp.activity.CalendarActivity;
+import net.simplifiedcoding.secretariaApp.calendario.EventObjects;
+import net.simplifiedcoding.secretariaApp.calendario.Util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
-import net.simplifiedcoding.secretariaApp.calendario.EventObjects;
-import net.simplifiedcoding.secretariaApp.calendario.Util;
 
 public class DownloadEvents extends AsyncTask<Void, Void, Integer> {
     ProgressDialog dialog;
@@ -68,6 +64,8 @@ public class DownloadEvents extends AsyncTask<Void, Void, Integer> {
             Log.e("Erro mesmo", "Erro - " + e.getMessage());
         }
         dialog.dismiss();
+        Intent intent = new Intent(c, CalendarActivity.class);
+        c.startActivity(intent);
         return 1;
     }
 
@@ -76,7 +74,7 @@ public class DownloadEvents extends AsyncTask<Void, Void, Integer> {
         StringBuffer response = new StringBuffer();
         try {
             reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }

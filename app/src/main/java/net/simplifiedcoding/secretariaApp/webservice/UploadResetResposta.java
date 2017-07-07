@@ -25,11 +25,11 @@ public class UploadResetResposta extends AsyncTask<Void, Void, Void> {
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 urlConnection.getInputStream();
-                Log.e("Resposta do prof reset", "status == -1");
+                Log.d("UploadResetResposta", "status == -1");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("Erro mesmo", "Erro - " + e.getMessage());
+            Log.e("UploadResetResposta", "Erro - " + e.getMessage());
         }
         return null;
     }

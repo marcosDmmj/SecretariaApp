@@ -15,6 +15,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.classesBasicas.OnTaskComplete;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
 //import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
@@ -39,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
         btnChamar = (Button) findViewById(R.id.btnChamar);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         setRepeatingAsyncTask();
     }
@@ -57,13 +57,12 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
 
                         try {
-                            DownloadStatus jsonTask = new DownloadStatus();
-                            Integer status = jsonTask.execute().get();
-                            if (status == 1) {
-                                btnChamar.setEnabled(false);
-                            } else {
-                                btnChamar.setEnabled(true);
-                            }
+                            new DownloadStatus(new OnTaskComplete() {
+                                @Override
+                                public void onTaskComplete(Integer status) {
+                                    btnChamar.setEnabled(status == 0);
+                                }
+                            }).execute();
                         } catch (Exception e) {
                             Log.e("Erro", e.getMessage());
                         }
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        timer.schedule(task, 0, 3000);  // interval of five seconds
+        timer.schedule(task, 0, 5000);  // interval of five seconds
 
     }
 
@@ -91,21 +90,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void chamarProf(View view) {
         Intent intent = new Intent(this, CallProfFABActivity.class);
-        task.cancel();
         startActivity(intent);
     }
 
     public void agendar(View view) {
-        Intent intent = new Intent(this, CalendarActivity.class);
-        task.cancel();
 
         try {
             new DownloadEvents(this).execute().get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
+            Log.e("MainActivity","Erro = "+e.getMessage());
         }
-
-        startActivity(intent);
+        //Intent intent = new Intent(c, CalendarActivity.class);
+        //startActivity(intent);
 
     }
 

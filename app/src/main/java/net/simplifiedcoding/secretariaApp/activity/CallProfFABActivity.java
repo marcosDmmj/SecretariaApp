@@ -52,8 +52,6 @@ public class CallProfFABActivity extends AppCompatActivity {
 
         imageViewPhoto = (ImageView) findViewById(R.id.imageView2);
         btnEnviarFoto = (Button) findViewById(R.id.btnEnviarFoto);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         // set the toolbar title
         if (getSupportActionBar() != null) {

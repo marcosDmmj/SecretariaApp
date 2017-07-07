@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import net.simplifiedcoding.insertintomysql.R;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
+import net.simplifiedcoding.secretariaApp.classesBasicas.OnTaskComplete;
 import net.simplifiedcoding.secretariaApp.webservice.UploadNewEvent;
 
 import java.util.Date;
@@ -126,24 +127,23 @@ public class AddEventActivity extends AppCompatActivity {
         boolean ok = Util.checkHour(Util.dateToHour(startHourComplete), Util.dateToMinute(startHourComplete),
                 Util.dateToHour(endHourComplete), Util.dateToMinute(endHourComplete));
         if(ok) {
-            try {
-                Integer ok1 = new UploadNewEvent(this).execute(Util.replaceSpaceWS(titulo.getText().toString()),
+                new UploadNewEvent(this, new OnTaskComplete() {
+                    @Override
+                    public void onTaskComplete(Integer status) {
+                        if (status == 1) {
+                            Toast.makeText(getBaseContext(), "Evento enviado para o professor! Aguarde email de confirmação de agendamento", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getBaseContext(), "Erro ao enviar evento!", Toast.LENGTH_SHORT).show();
+                        }
+                        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                        intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                }).execute(Util.replaceSpaceWS(titulo.getText().toString()),
                         Util.stringToStringWSComplete(currentDate.getText().toString(), currentStartTime.getText().toString()),
                         Util.stringToStringWSComplete(currentDate.getText().toString(), currentEndTime.getText().toString()),
                         Util.replaceSpaceWS(email.getText().toString()),
-                        Util.replaceSpaceWS(nome.getText().toString())).get();
-                if (ok1 == 1) {
-                    Toast.makeText(this, "Evento enviado para o professor! Aguarde email de confirmação de agendamento", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(this, "naaaaaoooo!!!!", Toast.LENGTH_SHORT).show();
-                }
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-                Log.e("Erro addNewEvent", e.getMessage());
-            }
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(FLAG_ACTIVITY_CLEAR_TOP);
-            this.startActivity(intent);
+                        Util.replaceSpaceWS(nome.getText().toString()));
         } else {
             Toast.makeText(this, "Favor informar horário fim maior que horário início!", Toast.LENGTH_SHORT).show();
         }

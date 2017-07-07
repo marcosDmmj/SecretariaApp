@@ -97,8 +97,6 @@ public class CalendarCustomView extends LinearLayout{
     }
 
     private void setUpCalendarAdapter(){
-        ArrayList<EventObjects> eventos = DownloadEvents.eventos;
-        Log.d(TAG, eventos.toString());
         List<Date> dayValueInCells = new ArrayList<>();
 
         Calendar mCal = (Calendar)cal.clone();
@@ -111,8 +109,9 @@ public class CalendarCustomView extends LinearLayout{
         }
 
         String sDate = Util.dateMonthToString(cal.getTime());
+        sDate = sDate.substring(0,1).toUpperCase() + sDate.substring(1).toLowerCase();
         currentDate.setText(sDate);
-        mAdapter = new GridAdapter(context, dayValueInCells, cal, eventos);
+        mAdapter = new GridAdapter(context, dayValueInCells, cal);
         calendarGridView.setAdapter(mAdapter);
     }
 }

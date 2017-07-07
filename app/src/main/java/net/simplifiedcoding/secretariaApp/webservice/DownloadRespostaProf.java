@@ -45,7 +45,7 @@ public class DownloadRespostaProf extends AsyncTask<Void, Void, Integer> {
         while (result == -1) {
             try {
                 URL url;
-                HttpURLConnection urlConnection = null;
+                HttpURLConnection urlConnection;
                 url = new URL("http://ufam-automation.net/marcosmoura/Resposta.txt");
                 urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -53,12 +53,12 @@ public class DownloadRespostaProf extends AsyncTask<Void, Void, Integer> {
 
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     String json = readStream(urlConnection.getInputStream());
-                    Log.e("RETORNA Resposta?", "Retorna resposta..." + json);
+                    Log.d("DownloadRespostaProf", "Retorna resposta..." + json);
                     result = Integer.parseInt(json);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e("Erro mesmo", "Erro - " + e.getMessage());
+                Log.e("DownloadRespostaProf", "Erro - " + e.getMessage());
             }
         }
         dialog.dismiss();
@@ -75,6 +75,7 @@ public class DownloadRespostaProf extends AsyncTask<Void, Void, Integer> {
                     .setCancelable(false)
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            new setaStatusAsync(c).execute("http://ufam-automation.net/marcosmoura/setStatus.php?Status=1");
                             ((Activity)c).finish();
                         }
                     });
@@ -101,7 +102,7 @@ public class DownloadRespostaProf extends AsyncTask<Void, Void, Integer> {
         StringBuffer response = new StringBuffer();
         try {
             reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }
@@ -117,5 +118,50 @@ public class DownloadRespostaProf extends AsyncTask<Void, Void, Integer> {
             }
         }
         return response.toString();
+    }
+
+    private class setaStatusAsync extends AsyncTask<String, Void, Void> {
+        Context c;
+        HttpURLConnection urlConnection;
+
+        public setaStatusAsync(Context c) {
+            this.c = c;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = ProgressDialog.show(c, "Aguarde", "Atualizando status, Por favor aguarde!");
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+
+            try {
+                URL url;
+                url = new URL(strings[0]);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                int responseCode = urlConnection.getResponseCode();
+
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStream in = urlConnection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    int status = Integer.parseInt(result.toString());
+                    Log.d("setaStatusAsync","Pegou o resultado de boas! "+status);
+                } else {
+                    Log.d("setaStatusAsync","A conexão não tá OK! code = "+responseCode);
+                }
+            }catch (Exception e) {
+                Log.e("MainActivity","Erro Status.txt= "+e.getMessage());
+            }
+
+            dialog.dismiss();
+            return null;
+        }
     }
 }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import net.simplifiedcoding.secretariaApp.classesBasicas.OnTaskComplete;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,9 +17,11 @@ import java.net.URL;
 public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
     private Context c;
     private ProgressDialog dialog;
+    private OnTaskComplete taskComplete;
 
-    public UploadNewEvent(Context c) {
+    public UploadNewEvent(Context c, OnTaskComplete taskComplete) {
         this.c = c;
+        this.taskComplete = taskComplete;
     }
 
     @Override
@@ -46,7 +50,6 @@ public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 Log.d("UploadNewEvent", "Está tudo ok na conexão!");
                 Log.d("UploadNewEvent", "Resultado = "+readStream(urlConnection.getInputStream()));
-                dialog.dismiss();
                 return 1;
             }
 
@@ -56,9 +59,14 @@ public class UploadNewEvent extends AsyncTask<String, Void, Integer> {
             Log.e("Erro mesmo", "Erro - "+e.getMessage());
         }
 
-        dialog.dismiss();
-        Log.d("UploadNewEvent", "Retornou not ok");
         return 0;
+    }
+
+    @Override
+    protected void onPostExecute(Integer integer) {
+        super.onPostExecute(integer);
+        dialog.dismiss();
+        taskComplete.onTaskComplete(integer);
     }
 
     private String readStream(InputStream in) {

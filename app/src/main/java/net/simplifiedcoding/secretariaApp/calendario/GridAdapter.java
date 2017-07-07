@@ -20,13 +20,11 @@ class GridAdapter extends ArrayAdapter {
     private LayoutInflater mInflater;
     private List<Date> monthlyDates;
     private Calendar currentDate;
-    private List<EventObjects> allEvents;
 
-    GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate, List<EventObjects> allEvents) {
+    GridAdapter(Context context, List<Date> monthlyDates, Calendar currentDate) {
         super(context, R.layout.single_cell_layout);
         this.monthlyDates = monthlyDates;
         this.currentDate = currentDate;
-        this.allEvents = allEvents;
         mInflater = LayoutInflater.from(context);
     }
 
@@ -53,20 +51,6 @@ class GridAdapter extends ArrayAdapter {
         //Add day to calendar
         TextView cellNumber = (TextView)view.findViewById(R.id.calendar_date_id);
         cellNumber.setText(String.valueOf(dayValue));
-        //Add events to the calendar
-        TextView eventIndicator = (TextView)view.findViewById(R.id.event_id);
-
-        Calendar eventCalendar = Calendar.getInstance();
-        for(int i = 0; i < allEvents.size(); i++){
-            eventCalendar.setTime(allEvents.get(i).getDateStart());
-            if(dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
-                    && displayYear == eventCalendar.get(Calendar.YEAR)){
-                eventIndicator.setBackgroundColor(Color.parseColor("#FF2400"));
-                //
-                // eventIndicator.setLayoutParams(new LinearLayout.LayoutParams(100,80));
-
-            }
-        }
         return view;
     }
     @Override

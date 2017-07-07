@@ -4,38 +4,40 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="#C0D9D9"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="370dp"
-            android:src="@drawable/artista_sem_foto_"
-            android:id="@+id/imageView2"
             android:adjustViewBounds="true"
             android:contentDescription="@string/action_settings"
-            android:rotation="0" />
+            android:rotation="0"
+            android:src="@drawable/artista_sem_foto_" />
 
 
         <LinearLayout
             android:id="@+id/viewB"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/background_light"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
-                android:text="@string/enviar_foto"
+                android:id="@+id/btnEnviarFoto"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnEnviarFoto"
-                android:layout_weight="1"
                 android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="#336666"
+                android:enabled="false"
                 android:onClick="sendPhoto"
-                android:enabled="false" />
+                android:text="@string/enviar_foto" />
         </LinearLayout>
 
     </LinearLayout>
@@ -47,9 +49,9 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_camera"
+
         app:layout_anchor="@id/imageView2"
         app:layout_anchorGravity="bottom|right|end"
         android:onClick="tookPhoto" />
-
 </android.support.design.widget.CoordinatorLayout>
 

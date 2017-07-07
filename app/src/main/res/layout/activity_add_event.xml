@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#C0D9D9"
     tools:context="net.simplifiedcoding.secretariaApp.activity.AddEventActivity"
     android:weightSum="1">
 
@@ -180,6 +181,7 @@
         android:enabled="false"
         android:layout_gravity="center"
         android:onClick="addNewEvent"
+        android:background="#336666"
         android:text="Adicionar Evento"
         android:textSize="25sp" />
 </LinearLayout>

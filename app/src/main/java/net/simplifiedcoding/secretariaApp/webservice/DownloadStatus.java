@@ -7,6 +7,7 @@ import android.util.Log;
 
 import net.simplifiedcoding.secretariaApp.calendario.EventObjects;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
+import net.simplifiedcoding.secretariaApp.classesBasicas.OnTaskComplete;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,12 +25,17 @@ import java.util.ArrayList;
  */
 
 public class DownloadStatus extends AsyncTask<Void, Void, Integer> {
+    OnTaskComplete taskComplete;
+
+    public DownloadStatus(OnTaskComplete taskComplete) {
+        this.taskComplete = taskComplete;
+    }
 
     @Override
     protected Integer doInBackground(Void... params) {
         try {
             URL url;
-            HttpURLConnection urlConnection = null;
+            HttpURLConnection urlConnection;
             url = new URL("http://ufam-automation.net/marcosmoura/Status.txt");
             urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -37,16 +43,21 @@ public class DownloadStatus extends AsyncTask<Void, Void, Integer> {
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 String json = readStream(urlConnection.getInputStream());
-                Log.e("RETORNA Status?", "Retorna Status..."+json);
+                Log.d("DownloadStatus", "Retorna Status..."+json);
                 return Integer.parseInt(json);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("Erro mesmo", "Erro - " + e.getMessage());
-        }
-//        dialog.dismiss();
+            Log.e("DownloadStatus", "Erro - " + e.getMessage());
+        };
         return 1;
+    }
+
+    @Override
+    protected void onPostExecute(Integer integer) {
+        super.onPostExecute(integer);
+        taskComplete.onTaskComplete(integer);
     }
 
     private String readStream(InputStream in) {
@@ -54,7 +65,7 @@ public class DownloadStatus extends AsyncTask<Void, Void, Integer> {
         StringBuffer response = new StringBuffer();
         try {
             reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null) {
                 response.append(line);
             }

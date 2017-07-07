@@ -66,14 +66,7 @@ public class Util {
     }
 
     public static Date stringHourToDate(String s) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        Date convertedDate = new Date();
-        try {
-            convertedDate = dateFormat.parse(s);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return convertedDate;
+        return null;
     }
 
     public static int dateToHour(Date date) {
@@ -126,5 +119,12 @@ public class Util {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static Date somaMinutos(Date fimDate, int minutos) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fimDate);
+        calendar.add(Calendar.MINUTE, minutos);
+        return calendar.getTime();
     }
 }

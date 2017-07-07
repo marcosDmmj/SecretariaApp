@@ -37,12 +37,18 @@ public class TimePickerFragmentStart extends DialogFragment implements TimePicke
                 + ":" + pad(minute));
 
         TextView txtHoraFim = (TextView) getActivity().findViewById(R.id.txtHoraFim);
-        if(hourOfDay == 23) {
+        Date fimDate = Util.stringHourToDate(pad(hourOfDay)+":"+pad(minute));
+        fimDate = Util.somaMinutos(fimDate, 30);
+
+        int fimDateHour, fimDateMinute;
+        fimDateHour = Util.dateToHour(fimDate);
+        fimDateMinute = Util.dateToMinute(fimDate);
+        if(fimDateHour == 23) {
             txtHoraFim.setText(pad(0)
-                    + ":" + pad(minute));
+                    + ":" + pad(fimDateMinute));
         } else {
-            txtHoraFim.setText(pad(hourOfDay + 1)
-                    + ":" + pad(minute));
+            txtHoraFim.setText(pad(fimDateHour)
+                    + ":" + pad(fimDateMinute));
         }
     }
 
