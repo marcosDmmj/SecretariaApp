@@ -2,8 +2,8 @@ package net.simplifiedcoding.secretariaApp.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Handler;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,20 +14,20 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 import net.simplifiedcoding.secretariaApp.classesBasicas.OnTaskComplete;
-import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
-//import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
-//import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.ExecutionException;
+
+//import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
+//import net.simplifiedcoding.secretariaApp.webservice.DownloadStatus;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnChamar;
-    private TimerTask task;
+    //private TimerTask task;
+    private Timer timer;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -42,25 +42,30 @@ public class MainActivity extends AppCompatActivity {
         btnChamar = (Button) findViewById(R.id.btnChamar);
 
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        setRepeatingAsyncTask();
     }
 
     private void setRepeatingAsyncTask() {
 
         final Handler handler = new Handler();
-        Timer timer = new Timer();
+        timer = new Timer();
 
-        task = new TimerTask() {
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-
                         try {
                             new DownloadStatus(new OnTaskComplete() {
                                 @Override
                                 public void onTaskComplete(Integer status) {
+                                    String message;
+                                    if (status == 0) {
+                                        message = "Falar com o professor";
+                                    } else {
+                                        message = "Professor indisponível";
+                                    }
                                     btnChamar.setEnabled(status == 0);
+                                    btnChamar.setText(message);
                                 }
                             }).execute();
                         } catch (Exception e) {
@@ -72,38 +77,30 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer.schedule(task, 0, 5000);  // interval of five seconds
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        task.run();
+        setRepeatingAsyncTask();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        task.run();
+        timer.cancel();
     }
 
     public void chamarProf(View view) {
+        timer.cancel();
         Intent intent = new Intent(this, CallProfFABActivity.class);
         startActivity(intent);
     }
 
     public void agendar(View view) {
-
-        try {
-            new DownloadEvents(this).execute().get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-            Log.e("MainActivity","Erro = "+e.getMessage());
-        }
-        //Intent intent = new Intent(c, CalendarActivity.class);
-        //startActivity(intent);
-
+        timer.cancel();
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
     }
 
     /**

@@ -8,7 +8,7 @@ import android.text.format.DateFormat;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
 
 import java.util.Date;

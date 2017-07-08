@@ -3,7 +3,6 @@ package net.simplifiedcoding.secretariaApp.calendario;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,10 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 import net.simplifiedcoding.secretariaApp.activity.DayCalendarActivity;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadEventByDate;
-import net.simplifiedcoding.secretariaApp.webservice.DownloadEvents;
 
 import java.util.ArrayList;
 import java.util.Calendar;

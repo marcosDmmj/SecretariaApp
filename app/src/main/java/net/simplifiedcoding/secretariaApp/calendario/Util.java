@@ -66,7 +66,14 @@ public class Util {
     }
 
     public static Date stringHourToDate(String s) {
-        return null;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        Date convertedDate = new Date();
+        try {
+            convertedDate = dateFormat.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return convertedDate;
     }
 
     public static int dateToHour(Date date) {

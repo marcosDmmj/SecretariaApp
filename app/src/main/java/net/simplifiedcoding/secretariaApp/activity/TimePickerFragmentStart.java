@@ -1,18 +1,18 @@
 package net.simplifiedcoding.secretariaApp.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TextView;
-import android.app.DialogFragment;
-import android.app.Dialog;
-import java.util.Date;
-
 import android.widget.TimePicker;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
+
+import java.util.Date;
 
 @SuppressLint("ValidFragment")
 public class TimePickerFragmentStart extends DialogFragment implements TimePickerDialog.OnTimeSetListener{

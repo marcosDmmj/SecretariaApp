@@ -6,28 +6,35 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
 import net.simplifiedcoding.secretariaApp.classesBasicas.OnTaskComplete;
 import net.simplifiedcoding.secretariaApp.webservice.UploadNewEvent;
 
 import java.util.Date;
-import java.util.concurrent.ExecutionException;
 
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class AddEventActivity extends AppCompatActivity {
     private TextView currentDate, currentStartTime, currentEndTime;
-    private EditText nome, email, titulo;
+    private EditText nome, email;
     private Button addEvento;
     private int countTitulo, countNome, countEmail;
+    private AutoCompleteTextView titulo;
+
+    private static final String[] TEXTES = new String[]{
+            "Trabalhos", "Prova", "Apresentacao TCC", "Correção de notas", "Dúvida sobre aula",
+            "Nota do portal"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +42,11 @@ public class AddEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_event);
         Intent intent = getIntent();
         String date = intent.getStringExtra("Date");
-        titulo = (EditText)findViewById(R.id.editTxtTitulo);
+
+        titulo = (AutoCompleteTextView) findViewById(R.id.editTxtTitulo);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line, TEXTES);
+        titulo.setAdapter(adapter);
+
         nome = (EditText)findViewById(R.id.editTxtNome);
         email = (EditText)findViewById(R.id.editTxtEmail);
         currentStartTime = (TextView)findViewById(R.id.txtHoraInicio);

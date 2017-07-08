@@ -1,4 +1,5 @@
 package net.simplifiedcoding.secretariaApp.calendario;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -7,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 
 import java.util.Calendar;
 import java.util.Date;

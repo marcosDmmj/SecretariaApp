@@ -17,7 +17,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 import net.simplifiedcoding.secretariaApp.calendario.EventObjects;
 import net.simplifiedcoding.secretariaApp.calendario.Util;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadEventByDate;
@@ -103,7 +103,7 @@ public class DayCalendarActivity extends AppCompatActivity {
 
     private void displayDailyEvents() {
         ArrayList<EventObjects> eventos = DownloadEventByDate.eventos;
-        Log.e("Erro no DisplayDaileyEv", "Pegiu alum eventi?"+eventos.toString());
+        Log.d(TAG, "Eventos = "+eventos.toString());
         for (EventObjects eObject : eventos) {
             Date eventDate = eObject.getDateStart();
             Date endDate = eObject.getDateEnd();

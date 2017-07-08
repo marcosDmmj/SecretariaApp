@@ -23,7 +23,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import net.simplifiedcoding.insertintomysql.R;
+import net.simplifiedcoding.secretariaApp.R;
 import net.simplifiedcoding.secretariaApp.webservice.DownloadRespostaProf;
 import net.simplifiedcoding.secretariaApp.webservice.UploadImage;
 import net.simplifiedcoding.secretariaApp.webservice.UploadResetResposta;
@@ -102,7 +102,13 @@ public class CallProfFABActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(cr, outputFileUri);
                 Bitmap.createScaledBitmap(bitmap, 300, 175, true);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 40, new ByteArrayOutputStream());
-                imageViewPhoto.setRotation(180);
+                int orientation = getResources().getConfiguration().orientation;
+                Log.d("DownloadStatus",""+orientation);
+                if (orientation == 1)
+                    imageViewPhoto.setRotation(270);
+                else
+                    if (orientation == 2)
+                        imageViewPhoto.setRotation(180);
                 imageViewPhoto.setImageBitmap(bitmap);
                 btnEnviarFoto.setEnabled(true);
             } catch (Exception e) {
